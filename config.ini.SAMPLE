@@ -1,0 +1,5 @@
+[config]
+twitter.client.key = 
+twitter.client.secret =
+twitter.token.key = 
+twitter.token.secret = 
