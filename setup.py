@@ -18,7 +18,9 @@ setup(
     install_requires = [
         'python-twitter',
         'nltk',
-        'betterconfig'
+        'betterconfig',
+        'celery',
+        'kombu-sqlalchemy'
     ],
     include_package_data=True,
     classifiers = [
