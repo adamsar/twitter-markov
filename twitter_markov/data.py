@@ -1,7 +1,7 @@
 """Data gathering module
 """
 
-import twitter
+from twitter_markov import twitter_util
 
 class DataPool(object):
 
@@ -9,17 +9,14 @@ class DataPool(object):
         raise NotImplemented
 
 
+class TrendingTwitterPool(DataPool):
 
-def TrendingTwitterPool(DataPool):
-
-    def __init__(self, client_id, client_secret,
-                 access_token_key, access_token_secret):
-        self.twitter = twitter.Api(
-            consumer_key = client_id,
-            consumer_secret = client_secret,
-            access_token_key = access_token_key,
-            access_token_secret = access_token_secret)
+    def __init__(self, twitter):
+        self.twitter = twitter
 
     def get_training_data(self):
         current_trends = self.twitter.GetTrendsCurrent()
-        
+        tweets = map(twitter_util.to_text,
+                   reduce(lambda x, y: x + y,
+                        map(lambda trend: self.twitter.GetSearch(term=trend.name), current_trends)))
+        return " ".join(tweets)

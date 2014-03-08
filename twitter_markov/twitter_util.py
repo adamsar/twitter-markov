@@ -15,3 +15,9 @@ def get_creds():
                 ['twitter.token.key', 'TWITTER_ACCESS_KEY'],
                 ['twitter.token.secret', 'TWITTER_TOKEN_SECRET']))
     assert None not in creds, "Missing a twitter configuration option."
+    return creds
+
+def to_text(tweet):
+    return tweet.text
+
+
