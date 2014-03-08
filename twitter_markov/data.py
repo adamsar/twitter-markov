@@ -18,5 +18,6 @@ class TrendingTwitterPool(DataPool):
         current_trends = self.twitter.GetTrendsCurrent()
         tweets = map(twitter_util.to_text,
                    reduce(lambda x, y: x + y,
-                        map(lambda trend: self.twitter.GetSearch(term=trend.name), current_trends)))
+                        map(lambda trend: self.twitter.GetSearch(term=trend.name,
+                                                                 lang='en'), current_trends)))
         return " ".join(tweets)
