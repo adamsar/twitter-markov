@@ -18,3 +18,5 @@ share
 test.py
 celery.db
 ipython_log.py
+celerydb.sqlite
+celerybeat-schedule
