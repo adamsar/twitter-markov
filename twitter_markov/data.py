@@ -2,6 +2,11 @@
 """
 
 from twitter_markov import twitter_util
+import re
+
+url_reg = re.compile("http://t.+\.co")
+tweetback_reg = re.compile("@[a-zA-Z0-9]+")
+hashtag_reg = re.compile("#[a-zA-Z0-9]")
 
 class DataPool(object):
 
@@ -20,4 +25,7 @@ class TrendingTwitterPool(DataPool):
                    reduce(lambda x, y: x + y,
                         map(lambda trend: self.twitter.GetSearch(term=trend.name,
                                                                  lang='en'), current_trends)))
+
+        for reg in (url_reg, tweetback_reg, hashtag_reg):
+            tweets = [reg.sub("", tweet) for tweet in tweets]            
         return " ".join(tweets)
