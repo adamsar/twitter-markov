@@ -16,6 +16,6 @@ def tweet_latest():
         access_token_key = akey,
         access_token_secret = asecret)
     seed_words = data.TrendingTwitterPool(client).get_training_data()
-    text = generate_text(seed_words)
+    text = generate_text(seed_words, initial_model=1000)
     client.PostUpdate(text)
 
